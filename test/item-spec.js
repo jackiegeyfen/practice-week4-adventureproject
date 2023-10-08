@@ -178,7 +178,7 @@ describe ('World', function () {
     let world = new World();
     world.loadWorld(worldData);
 
-    room = world.rooms[1];
+    let room = world.rooms[1];
     roomItems = room.items;
     expect(roomItems[0].name).to.equal('rock')
   })

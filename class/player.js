@@ -28,33 +28,58 @@ class Player {
         } else {
             console.log(`${this.name} is carrying:`);
             for (let i = 0 ; i < this.items.length ; i++) {
-                console.log(`  ${this.items[i].name}`);
+                console.log(`${this.items[i].name}`);
             }
         }
     }
 
     takeItem(itemName) {
         // Picks up an item from the current room into the player's inventory
-
         // Your code here
-    }
+            let roomItemList = this.currentRoom.items;
+            for (let i = 0; i < roomItemList.length; i++) {
+                let item = roomItemList[i];
+                if (itemName === item.name) {
+                    roomItemList.splice(i, 1)
+                    this.items.push(item);
+                }
+            }
+        }
 
     dropItem(itemName) {
         // Drops an item the player is holding into their current room
-
         // Your code here
+        let roomItemList = this.currentRoom.items;
+        for (let i = 0; i < this.items.length; i++) {
+            let item = this.items[i];
+            if (item.name === itemName) {
+                roomItemList.push(item)
+                this.items.splice(i, 1)
+            }
+        }
     }
 
     eatItem(itemName) {
         // Allow the player to eat food items, but not non-food items
-
         // Your code here
+        for (let i = 0; i < this.items.length; i++) {
+            let item = this.items[i];
+            if (item.name === itemName && item instanceof Food) {
+                return this.items.splice(i, 1)
+            }
+        }
     }
 
     getItemByName(name) {
         // Retrieves an item from a player's inventory by item name
-
         // Your code here
+        for (let i = 0; i < this.items.length; i++) {
+            let item = this.items[i];
+            if (item.name === name) {
+                this.items.splice(i, 1)
+                return item
+            }
+        }
     }
 }
 
